@@ -9,20 +9,26 @@ import UIKit
 import GoogleMaps
 
 class MapViewController: UIViewController {
+        
+    // MARK: - Private properties
     
-    @IBOutlet weak var mapView: GMSMapView!
+    private var marker: GMSMarker?
+    private var geoCoder: CLGeocoder?
+    private var locationManager: CLLocationManager?
+    private var route: GMSPolyline?
+    private var routePath: GMSMutablePath?
     
-    var marker: GMSMarker?
-    var geoCoder: CLGeocoder?
-    var locationManager: CLLocationManager?
-    var route: GMSPolyline?
-    var routePath: GMSMutablePath?
-    
-    let coordinate = CLLocationCoordinate2D(latitude: 64.540643163229,
+    // Дефолтные координаты
+    private let coordinate = CLLocationCoordinate2D(latitude: 64.540643163229,
                                             longitude: 39.805884020953464)
     
+    private let customView = MapView(frame: UIScreen.main.bounds)
+    
+    // MARK: - Lifecycle
+    
     override func loadView() {
-//        view = 
+        view = customView
+        customView.setupView()
     }
     
     override func viewDidLoad() {
@@ -30,13 +36,12 @@ class MapViewController: UIViewController {
         
         configureMap()
         configureLocationManager()
-        
         updateLocation()
     }
     
     // MARK: - Private methods
     
-    func updateLocation() {
+    private func updateLocation() {
         locationManager?.requestLocation()
         
         route?.map = nil
@@ -44,17 +49,16 @@ class MapViewController: UIViewController {
         route = GMSPolyline()
         routePath = GMSMutablePath()
         
-        route?.map = mapView
+        route?.map = customView.mapView
         
         locationManager?.startUpdatingLocation()
     }
     
     private func configureMap() {
         let camera = GMSCameraPosition.camera(withTarget: coordinate, zoom: 15)
-        mapView.camera = camera
-        mapView.isMyLocationEnabled = true
-        
-        mapView.delegate = self
+        customView.mapView.camera = camera
+        customView.mapView.isMyLocationEnabled = true
+        customView.mapView.delegate = self
     }
     
     private func configureLocationManager() {
@@ -64,19 +68,23 @@ class MapViewController: UIViewController {
         locationManager?.allowsBackgroundLocationUpdates = true
     }
     
+    // Добавляет маркер на карту с описанием
     private func addMarker() {
         marker = GMSMarker(position: coordinate)
-        marker?.map = mapView
+        marker?.map = customView.mapView
         
         marker?.title = "Заголовок"
         marker?.snippet = "Сниппет"
     }
     
+    // Удаляет маркер
     private func removeMarker() {
         marker?.map = nil
         marker = nil
     }
 }
+
+// MARK: - MapViewController + GMSMapViewDelegate
 
 extension MapViewController: GMSMapViewDelegate {
     //Получаем координаты куда нажали
@@ -95,6 +103,8 @@ extension MapViewController: GMSMapViewDelegate {
     }
 }
 
+// MARK: - MapViewController + CLLocationManagerDelegate
+
 extension MapViewController: CLLocationManagerDelegate {
     // Получает данные по мере того как наш объект двигается по карте
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -104,13 +114,14 @@ extension MapViewController: CLLocationManagerDelegate {
         route?.path = routePath
         
 //        let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 15)
-        mapView.animate(toLocation: location.coordinate)
+        customView.mapView.animate(toLocation: location.coordinate)
         
         marker = GMSMarker(position: location.coordinate)
-        marker?.map = mapView
+        marker?.map = customView.mapView
         marker?.title = "Координаты"
         marker?.snippet = "\(location.coordinate.longitude) \(location.coordinate.latitude)"
         
+
         print(location)
     }
     

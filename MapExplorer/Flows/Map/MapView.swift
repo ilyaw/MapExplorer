@@ -6,15 +6,27 @@
 //
 
 import UIKit
+import SnapKit
+import GoogleMaps
 
 class MapView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    /// Карта
+    private(set) var mapView: GMSMapView = {
+        let map = GMSMapView()
+        return map
+    }()
+    
+    func setupView() {
+        addSubviews()
+        setConstraints()
     }
-    */
-
+    
+    private func addSubviews() {
+        addSubview(mapView)
+    }
+    
+    private func setConstraints() {
+        mapView.snp.makeConstraints { $0.edges.equalToSuperview() }
+    }
+    
 }
