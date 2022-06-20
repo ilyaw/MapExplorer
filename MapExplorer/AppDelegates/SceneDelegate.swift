@@ -6,17 +6,49 @@
 //
 
 import UIKit
+import Swinject
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    
+    private var appCoordinator: AppCoordinatorDelegate?
+    private let container: Container = {
+        let container = Container()
+        // Карта
+        container.register(MapViewController.self) { _ in
+            let viewModel = MapViewModel()
+            let controller = MapViewController(viewModel: viewModel)
+            return controller
+        }
+        
+        // Список сохраненных маршрутов
+        container.register(RoutesViewController.self) { (_, routes: [Route]) in
+            let viewModel = RoutesViewModel()
+            let controller = RoutesViewController(routes: routes, viewModel: viewModel)
+            return controller
+        }
+        
+        // Выбранный сохранненый маршрут
+        container.register(SelectRouteViewController.self) { (_, locations: [Location]) in
+            let controller = SelectRouteViewController(locations: locations)
+            return controller
+        }
+        
+        // Координатор
+        container.register(AppCoordinatorDelegate.self) { (_, window: UIWindow?) in
+            let controller = AppCoordinator(window: window, container: container)
+            return controller
+        }
+        return container
+    }()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = MapViewController()
-        window?.makeKeyAndVisible()
+        
+        appCoordinator = container.resolve(AppCoordinatorDelegate.self, argument: window)
+        appCoordinator?.start()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -47,6 +79,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
-
 }
-

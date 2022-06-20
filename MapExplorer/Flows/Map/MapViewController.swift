@@ -7,9 +7,23 @@
 
 import UIKit
 import GoogleMaps
+import RealmSwift
+import RxSwift
+import RxCocoa
+import ReactorKit
+import RxRelay
 
-class MapViewController: UIViewController {
-        
+protocol MapDelegate: AnyObject {
+    func showListRoutes(with routes: [Route])
+}
+
+/// Экран с картой (главная страница)
+class MapViewController: UIViewController, View {
+    
+    weak var delegate: MapDelegate?
+    
+    var disposeBag = DisposeBag()
+    
     // MARK: - Private properties
     
     private var marker: GMSMarker?
@@ -20,9 +34,22 @@ class MapViewController: UIViewController {
     
     // Дефолтные координаты
     private let coordinate = CLLocationCoordinate2D(latitude: 64.540643163229,
-                                            longitude: 39.805884020953464)
+                                                    longitude: 39.805884020953464)
     
     private let customView = MapView(frame: UIScreen.main.bounds)
+    
+    private var userRoute: Route?
+    private let viewModel: MapViewModel
+    
+    init(viewModel: MapViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     // MARK: - Lifecycle
     
@@ -34,24 +61,98 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        reactor = viewModel
         configureMap()
         configureLocationManager()
-        updateLocation()
+    }
+    
+    // MARK: - Public methods
+    
+    /// Биндинг
+    func bind(reactor: MapViewModel) {
+        
+        // Тап по кнопке старт
+        customView.startButton.rx.tap
+            .map { Reactor.Action.startRoute }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        // Тап по кнопке стоп
+        customView.stopButton.rx.tap
+            .map { Reactor.Action.stopRoute }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        // Тап по кнопке открытия маршрутов
+        customView.openRoutesButton.rx.tap
+            .map { Reactor.Action.openListRoutes }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+        
+        // Признак состояния движения
+        reactor.state
+            .map { $0.isActiveMovement }
+            .distinctUntilChanged()
+            .skip(1)
+            .bind(onNext: { [weak self] isActiveMovement in
+                guard let self = self else { return }
+                if isActiveMovement {
+                    self.customView.setStop()
+                    self.start()
+                } else {
+                    self.stop()
+                    self.viewModel.action.onNext(.saveRoutes(self.userRoute))
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        // Признак сохранения маршрута
+        reactor.state
+            .map { $0.isSaved }
+            .distinctUntilChanged()
+            .skip(1)
+            .bind { [weak self] isSaved in
+                if isSaved {
+                    self?.customView.setStart()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        // Выводит ошибку
+        reactor.state
+            .filter { $0.errorMessage != nil }
+            .compactMap { $0.errorMessage }
+            .bind { [weak self] message in
+                self?.showAlert(title: "Ошибка", message: message)
+            }
+            .disposed(by: disposeBag)
+        
+        // Открывает список сохраненных маршрутов
+        reactor.state
+            .filter { $0.openListRoutes != nil }
+            .compactMap { $0.openListRoutes }
+            .bind { [weak self] routes in
+                self?.delegate?.showListRoutes(with: routes)
+            }
+            .disposed(by: disposeBag)
     }
     
     // MARK: - Private methods
     
-    private func updateLocation() {
+    private func start() {
+        userRoute = Route()
         locationManager?.requestLocation()
         
         route?.map = nil
-        
         route = GMSPolyline()
         routePath = GMSMutablePath()
-        
         route?.map = customView.mapView
         
         locationManager?.startUpdatingLocation()
+    }
+    
+    private func stop() {
+        self.locationManager?.stopUpdatingLocation()
     }
     
     private func configureMap() {
@@ -66,21 +167,6 @@ class MapViewController: UIViewController {
         locationManager?.delegate = self
         locationManager?.requestAlwaysAuthorization()
         locationManager?.allowsBackgroundLocationUpdates = true
-    }
-    
-    // Добавляет маркер на карту с описанием
-    private func addMarker() {
-        marker = GMSMarker(position: coordinate)
-        marker?.map = customView.mapView
-        
-        marker?.title = "Заголовок"
-        marker?.snippet = "Сниппет"
-    }
-    
-    // Удаляет маркер
-    private func removeMarker() {
-        marker?.map = nil
-        marker = nil
     }
 }
 
@@ -108,25 +194,24 @@ extension MapViewController: GMSMapViewDelegate {
 extension MapViewController: CLLocationManagerDelegate {
     // Получает данные по мере того как наш объект двигается по карте
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else { return }
+        guard let currentLocation = locations.last else { return }
         
-        routePath?.add(location.coordinate)
+        routePath?.add(currentLocation.coordinate)
         route?.path = routePath
         
-//        let position = GMSCameraPosition.camera(withTarget: location.coordinate, zoom: 15)
-        customView.mapView.animate(toLocation: location.coordinate)
+        customView.mapView.animate(toLocation: currentLocation.coordinate)
         
-        marker = GMSMarker(position: location.coordinate)
-        marker?.map = customView.mapView
-        marker?.title = "Координаты"
-        marker?.snippet = "\(location.coordinate.longitude) \(location.coordinate.latitude)"
+        routePath?.add(currentLocation.coordinate)
+        let polyline = GMSPolyline(path: routePath)
+        polyline.strokeWidth = 10
+        polyline.strokeColor = .red
+        polyline.map = customView.mapView
         
-
-        print(location)
+        userRoute?.locations.append(Location(location: currentLocation.coordinate))
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error.localizedDescription)
     }
 }
-    
+
