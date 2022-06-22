@@ -1,0 +1,18 @@
+/* 
+  Localizable.strings
+  MapExplorer
+
+  Created by Ilya on 18.06.2022.
+  
+*/
+
+"map_start" = "Start";
+"map_stop" = "Stop";
+"map_routers" = "Routers";
+
+"routes_title" = "Routes";
+"routes_emptyRoutes" = "List of routes is empty";
+
+"selectRoute_close" = "Close";
+"selectRoute_start" = "Start";
+"selectRoute_finish" = "Finish";
