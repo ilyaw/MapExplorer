@@ -6,6 +6,7 @@ target 'MapExplorer' do
   use_frameworks!
 
   # Pods for MapExplorer
+  pod 'SnapKit', '~> 5.6.0'
   pod 'GoogleMaps', '6.2.1'
   pod 'Alamofire'
 
