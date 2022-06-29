@@ -12,7 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     
-    private var appCoordinator: AppCoordinatorDelegate?
+    private var appRouter: AppRouterDelegate?
     private let container: Container = {
         let container = Container()
         // Карта
@@ -35,9 +35,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return controller
         }
         
-        // Координатор
-        container.register(AppCoordinatorDelegate.self) { (_, window: UIWindow?) in
-            let controller = AppCoordinator(window: window, container: container)
+        // Авторизация
+        container.register(LoginViewController.self) { _ in
+            let viewModel = LoginViewModel()
+            let controller = LoginViewController(viewModel: viewModel)
+            return controller
+        }
+        
+        // Регистрация
+        container.register(RegistrationViewController.self) { _ in
+            let viewModel = RegistrationViewModel()
+            let controller = RegistrationViewController(viewModel: viewModel)
+            return controller
+        }
+        
+        // Роутер
+        container.register(AppRouterDelegate.self) { (_, window: UIWindow?) in
+            let controller = AppRouter(window: window, container: container)
             return controller
         }
         return container
@@ -47,8 +61,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
-        appCoordinator = container.resolve(AppCoordinatorDelegate.self, argument: window)
-        appCoordinator?.start()
+        appRouter = container.resolve(AppRouterDelegate.self, argument: window)
+        appRouter?.start()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

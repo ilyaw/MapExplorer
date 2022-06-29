@@ -16,3 +16,14 @@
 "selectRoute_close" = "Close";
 "selectRoute_start" = "Start";
 "selectRoute_finish" = "Finish";
+
+"login_input_login" = "Input your login";
+"login_input_password" = "Input your password";
+"login_authorize_button" = "Log in";
+"login_create_account_button" = "Create account";
+"login_title" = "Authorization";
+"login_user_invalid" = "Wrong login or password";
+
+"registration_title" = "Sign Up";
+"registration_button_title" = "Sign Up";
+"registration_error" = "Registration error";

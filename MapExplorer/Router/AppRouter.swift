@@ -8,8 +8,10 @@
 import Foundation
 import Swinject
 
-/// Делегат для координатора
-protocol AppCoordinatorDelegate: AnyObject {
+/// Делегат для роутера
+protocol AppRouterDelegate: AnyObject {
+    /// Навигационный контроллер
+    var navigationController: UINavigationController { get }
     /// Открывает экран со списком сохраненных маршутов
     func openListRoutes(_ routes: [Route])
     /// Открывает экран с картой
@@ -20,43 +22,62 @@ protocol AppCoordinatorDelegate: AnyObject {
     func start()
 }
 
-/// Недокоординатор
-class AppCoordinator: AppCoordinatorDelegate {
+/// Роутер для навигации
+class AppRouter: AppRouterDelegate {
+    
+    private(set) var navigationController = UINavigationController()
     
     private let window: UIWindow?
     private let container: Container
-    private let navigationController = UINavigationController()
     
     init(window: UIWindow?, container: Container) {
         self.window = window
         self.container = container
     }
     
+    // MARK: - Public methods
+    
     func start() {
-        openMap()
+        if UserDefaults.standard.bool(forKey: AppConstants.loginKey) {
+            openMap()
+        } else {
+            openLoginPage()
+        }
+        
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
+    }
+    
+    func openLoginPage() {
+        guard let controller = container.resolve(LoginViewController.self) else { return }
+        controller.delegate = self
+        setViewController(controller)
+    }
+    
+    func openRegistrationPage() {
+        guard let controller = container.resolve(RegistrationViewController.self) else { return }
+        controller.delegate = self
+        pushViewController(controller)
     }
     
     func openListRoutes(_ routes: [Route]) {
         guard let controller = container.resolve(RoutesViewController.self, argument: routes) else { return }
         controller.delegate = self
-        
         pushViewController(controller)
     }
     
     func openMap() {
         guard let controller = container.resolve(MapViewController.self) else { return }
         controller.delegate = self
-        
-        navigationController.setViewControllers([controller], animated: true)
+        setViewController(controller)
     }
     
     func showRoute(locations: [Location]) {
         guard let controller = container.resolve(SelectRouteViewController.self, argument: locations) else { return }
-        
         present(controller)
     }
+    
+    // MARK: - Private methods
     
     private func pushViewController(_ controller: UIViewController, animated: Bool = true) {
         navigationController.pushViewController(controller, animated: animated)
@@ -66,18 +87,39 @@ class AppCoordinator: AppCoordinatorDelegate {
         navigationController.present(controller, animated: animated)
     }
     
+    private func setViewControllers(_ controllers: [UIViewController], animated: Bool = true) {
+        navigationController.setViewControllers(controllers, animated: true)
+    }
+    
+    private func setViewController(_ controllers: UIViewController, animated: Bool = true) {
+        navigationController.setViewControllers([controllers], animated: true)
+    }
 }
 
 // MARK: - MapDelegate
-extension AppCoordinator: MapDelegate {
+extension AppRouter: MapDelegate {
     func showListRoutes(with routes: [Route]) {
         openListRoutes(routes)
     }
 }
 
 // MARK: - RoutesDelegate
-extension AppCoordinator: RoutesDelegate {
+extension AppRouter: RoutesDelegate {
     func showSelectedRoute(locations: [Location]) {
         showRoute(locations: locations)
+    }
+}
+
+// MARK: - LoginDelegate
+extension AppRouter: LoginDelegate {
+    func createAccount() {
+        openRegistrationPage()
+    }
+}
+
+// MARK: - RegistrationDelegate
+extension AppRouter: RegistrationDelegate {
+    func goToMainScreen() {
+        openMap()
     }
 }

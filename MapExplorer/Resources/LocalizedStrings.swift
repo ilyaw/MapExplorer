@@ -34,4 +34,27 @@ struct Strings {
         static let finish = "selectRoute_finish".localized
     }
     
+    struct Login {
+        /// Авторизация
+        static let title = "login_title".localized
+        /// Ваш логин
+        static let inputLogin = "login_input_login".localized
+        /// Ваш пароль
+        static let inputPassword = "login_input_password".localized
+        /// Авторизоваться
+        static let authorizeButtonTitle = "login_authorize_button".localized
+        /// Создать аккаунт
+        static let createAccountButtonTitle = "login_create_account_button".localized
+        /// Неверный логин или пароль
+        static let userInvalid = "login_user_invalid".localized
+    }
+
+    struct Registration {
+        /// Регистрация
+        static let title = "registration_title".localized
+        /// Зарегистрироваться
+        static let buttonTitle = "registration_button_title".localized
+        /// Ошибка регистрации
+        static let registrationError = "registration_error".localized
+    }
 }
