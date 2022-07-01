@@ -45,6 +45,12 @@ class LoginViewController: UIViewController, View {
     func bind(reactor: LoginViewModel) {
         var user: (String, String) { (customView.loginField.text ?? "", customView.passwordField.text ?? "")  }
         
+        customView.configureLoginBindings()
+            .bind { [weak self] inputFilled in
+                self?.customView.loginButton.isEnabled = inputFilled
+            }
+            .disposed(by: disposeBag)
+        
         // Тап по кнопке "войти"
         customView.loginButton.rx.tap
             .map { Reactor.Action.login(user.0, user.1) }

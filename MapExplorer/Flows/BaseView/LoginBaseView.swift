@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-
+import RxSwift
 
 extension LoginBaseView {
     struct Appearance {
@@ -84,6 +84,15 @@ class LoginBaseView: UIView {
         informationLabel.isHidden = false
         informationLabel.textColor = color
         informationLabel.text = text
+    }
+    
+    func configureLoginBindings() -> Observable<Bool> {
+        return Observable
+            .combineLatest(loginField.rx.text, passwordField.rx.text)
+            .map { (login, password) -> Bool in
+                guard let login = login, let password = password else { return false }
+                return !(login.isEmpty || password.isEmpty)
+            }
     }
     
     private func setupView() {
