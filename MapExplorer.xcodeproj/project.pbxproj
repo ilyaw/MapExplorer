@@ -8,9 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		0913FEA228311BFB00426BB2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0913FEA128311BFB00426BB2 /* MapKit.framework */; };
+		0915B331286CAE770053D559 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0915B330286CAE770053D559 /* AppConstants.swift */; };
 		093542B0285E6F4E0023F5BD /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093542AF285E6F4E0023F5BD /* Button.swift */; };
 		093542B2285E72060023F5BD /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093542B1285E72060023F5BD /* UIStackView+.swift */; };
+		094C9C242867052C002A28DA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094C9C232867052C002A28DA /* User.swift */; };
+		094C9C2628670D3A002A28DA /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094C9C2528670D3A002A28DA /* RegistrationViewController.swift */; };
+		094C9C2928670D4C002A28DA /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094C9C2828670D4C002A28DA /* RegistrationViewModel.swift */; };
 		0963ED1E285F68DF00B53E78 /* UIVIewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0963ED1D285F68DE00B53E78 /* UIVIewController+.swift */; };
+		0976B1BC2862545300420B42 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0976B1BB2862545300420B42 /* LoginViewController.swift */; };
+		0976B1BE2862548E00420B42 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0976B1BD2862548E00420B42 /* LoginView.swift */; };
+		0976B1C1286254B300420B42 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0976B1C0286254B300420B42 /* LoginViewModel.swift */; };
+		0976B1C328625D0A00420B42 /* LoginBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0976B1C228625D0A00420B42 /* LoginBaseView.swift */; };
+		0976B1C528625D8400420B42 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0976B1C428625D8400420B42 /* RegistrationView.swift */; };
 		097E15AD2860F0B9002355F7 /* List+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097E15AC2860F0B9002355F7 /* List+.swift */; };
 		097E15B02860F89C002355F7 /* SelectRouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097E15AF2860F89C002355F7 /* SelectRouteViewController.swift */; };
 		097E15B32860F8AF002355F7 /* SelectRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097E15B22860F8AF002355F7 /* SelectRouteView.swift */; };
@@ -29,7 +38,7 @@
 		09D907A9285F873E00F1EAC6 /* RoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D907A8285F873E00F1EAC6 /* RoutesView.swift */; };
 		09D907AB285F874D00F1EAC6 /* RoutesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D907AA285F874D00F1EAC6 /* RoutesViewController.swift */; };
 		09D907AD285F88C200F1EAC6 /* Results+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D907AC285F88C200F1EAC6 /* Results+.swift */; };
-		09D907B0285F9E7200F1EAC6 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D907AF285F9E7200F1EAC6 /* AppCoordinator.swift */; };
+		09D907B0285F9E7200F1EAC6 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D907AF285F9E7200F1EAC6 /* AppRouter.swift */; };
 		09E1EFF4285E5BC40082F2E1 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E1EFF3285E5BC40082F2E1 /* MapViewModel.swift */; };
 		09ECF1C6285DFD05007B6BAC /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ECF1C5285DFD05007B6BAC /* RealmManager.swift */; };
 		09ECF1C9285DFDCB007B6BAC /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ECF1C8285DFDCB007B6BAC /* Location.swift */; };
@@ -40,9 +49,18 @@
 /* Begin PBXFileReference section */
 		06BC8E54C4EB5C3ADAF2590D /* Pods_MapExplorer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MapExplorer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0913FEA128311BFB00426BB2 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		0915B330286CAE770053D559 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		093542AF285E6F4E0023F5BD /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		093542B1285E72060023F5BD /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
+		094C9C232867052C002A28DA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		094C9C2528670D3A002A28DA /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		094C9C2828670D4C002A28DA /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		0963ED1D285F68DE00B53E78 /* UIVIewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVIewController+.swift"; sourceTree = "<group>"; };
+		0976B1BB2862545300420B42 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		0976B1BD2862548E00420B42 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		0976B1C0286254B300420B42 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		0976B1C228625D0A00420B42 /* LoginBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginBaseView.swift; sourceTree = "<group>"; };
+		0976B1C428625D8400420B42 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		097E15AC2860F0B9002355F7 /* List+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+.swift"; sourceTree = "<group>"; };
 		097E15AF2860F89C002355F7 /* SelectRouteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRouteViewController.swift; sourceTree = "<group>"; };
 		097E15B22860F8AF002355F7 /* SelectRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRouteView.swift; sourceTree = "<group>"; };
@@ -65,7 +83,7 @@
 		09D907A8285F873E00F1EAC6 /* RoutesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesView.swift; sourceTree = "<group>"; };
 		09D907AA285F874D00F1EAC6 /* RoutesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesViewController.swift; sourceTree = "<group>"; };
 		09D907AC285F88C200F1EAC6 /* Results+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Results+.swift"; sourceTree = "<group>"; };
-		09D907AF285F9E7200F1EAC6 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		09D907AF285F9E7200F1EAC6 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		09E1EFF3285E5BC40082F2E1 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		09ECF1C5285DFD05007B6BAC /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		09ECF1C8285DFDCB007B6BAC /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -104,6 +122,24 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		094C9C2728670D3D002A28DA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0976B1C428625D8400420B42 /* RegistrationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		094C9C2A28671E99002A28DA /* RealmModels */ = {
+			isa = PBXGroup;
+			children = (
+				09ECF1CC285E0E67007B6BAC /* Route.swift */,
+				09ECF1C8285DFDCB007B6BAC /* Location.swift */,
+				094C9C232867052C002A28DA /* User.swift */,
+			);
+			path = RealmModels;
+			sourceTree = "<group>";
+		};
 		0965020C1F295A94575E1CE9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +147,24 @@
 				695B3535AC2E1C1629FA0FD4 /* Pods-MapExplorer.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		0976B1BA2862543D00420B42 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				0976B1BF2862549000420B42 /* View */,
+				0976B1BB2862545300420B42 /* LoginViewController.swift */,
+				0976B1C0286254B300420B42 /* LoginViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		0976B1BF2862549000420B42 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0976B1BD2862548E00420B42 /* LoginView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		097E15AE2860F882002355F7 /* SelectRoute */ = {
@@ -142,6 +196,9 @@
 		0982F778285DCC0400FB1112 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
+				09E27AFD28663CAF00E8A4FD /* BaseView */,
+				0976B1BA2862543D00420B42 /* Login */,
+				09E27AFC28663C6700E8A4FD /* Registration */,
 				0982F779285DCC0F00FB1112 /* Map */,
 				09D907A7285F873000F1EAC6 /* Routes */,
 				097E15AE2860F882002355F7 /* SelectRoute */,
@@ -174,7 +231,7 @@
 		0991DF1C285E4E9900C098DA /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				09D907AE285F9E4200F1EAC6 /* Coordinators */,
+				0915B330286CAE770053D559 /* AppConstants.swift */,
 				093542AE285E6F1A0023F5BD /* Components */,
 				0991DF1D285E4EA500C098DA /* Extensions */,
 			);
@@ -216,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				0982F777285DCBFB00FB1112 /* AppDelegates */,
+				09D907AE285F9E4200F1EAC6 /* Router */,
 				0991DF1C285E4E9900C098DA /* Core */,
 				09ECF1C3285DFCF4007B6BAC /* Services */,
 				09ECF1C7285DFDBA007B6BAC /* Models */,
@@ -243,12 +301,12 @@
 			path = Routes;
 			sourceTree = "<group>";
 		};
-		09D907AE285F9E4200F1EAC6 /* Coordinators */ = {
+		09D907AE285F9E4200F1EAC6 /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				09D907AF285F9E7200F1EAC6 /* AppCoordinator.swift */,
+				09D907AF285F9E7200F1EAC6 /* AppRouter.swift */,
 			);
-			path = Coordinators;
+			path = Router;
 			sourceTree = "<group>";
 		};
 		09E1EFF5285E603F0082F2E1 /* View */ = {
@@ -257,6 +315,24 @@
 				0982F775285DCBE700FB1112 /* MapView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		09E27AFC28663C6700E8A4FD /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				094C9C2728670D3D002A28DA /* View */,
+				094C9C2528670D3A002A28DA /* RegistrationViewController.swift */,
+				094C9C2828670D4C002A28DA /* RegistrationViewModel.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
+		09E27AFD28663CAF00E8A4FD /* BaseView */ = {
+			isa = PBXGroup;
+			children = (
+				0976B1C228625D0A00420B42 /* LoginBaseView.swift */,
+			);
+			path = BaseView;
 			sourceTree = "<group>";
 		};
 		09ECF1C3285DFCF4007B6BAC /* Services */ = {
@@ -270,8 +346,7 @@
 		09ECF1C7285DFDBA007B6BAC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				09ECF1CC285E0E67007B6BAC /* Route.swift */,
-				09ECF1C8285DFDCB007B6BAC /* Location.swift */,
+				094C9C2A28671E99002A28DA /* RealmModels */,
 				097E15B628610767002355F7 /* RowOfRouteData.swift */,
 			);
 			path = Models;
@@ -414,27 +489,36 @@
 			buildActionMask = 2147483647;
 			files = (
 				09A19BFE28311237001440CA /* MapViewController.swift in Sources */,
+				094C9C2928670D4C002A28DA /* RegistrationViewModel.swift in Sources */,
 				097E15AD2860F0B9002355F7 /* List+.swift in Sources */,
 				093542B0285E6F4E0023F5BD /* Button.swift in Sources */,
+				0976B1C528625D8400420B42 /* RegistrationView.swift in Sources */,
 				0982F776285DCBE700FB1112 /* MapView.swift in Sources */,
+				0976B1C328625D0A00420B42 /* LoginBaseView.swift in Sources */,
 				09A48B9A285E552200CC2993 /* String+.swift in Sources */,
 				0991DF1F285E4EB300C098DA /* UIView+.swift in Sources */,
+				094C9C242867052C002A28DA /* User.swift in Sources */,
 				097E15B32860F8AF002355F7 /* SelectRouteView.swift in Sources */,
 				09ECF1C6285DFD05007B6BAC /* RealmManager.swift in Sources */,
+				0976B1C1286254B300420B42 /* LoginViewModel.swift in Sources */,
 				09D907AD285F88C200F1EAC6 /* Results+.swift in Sources */,
 				09A19BFA28311237001440CA /* AppDelegate.swift in Sources */,
 				097E15B02860F89C002355F7 /* SelectRouteViewController.swift in Sources */,
-				09D907B0285F9E7200F1EAC6 /* AppCoordinator.swift in Sources */,
+				09D907B0285F9E7200F1EAC6 /* AppRouter.swift in Sources */,
+				0976B1BC2862545300420B42 /* LoginViewController.swift in Sources */,
+				0976B1BE2862548E00420B42 /* LoginView.swift in Sources */,
 				093542B2285E72060023F5BD /* UIStackView+.swift in Sources */,
 				09BE18CF285FB77F00772BC0 /* RoutesViewModel.swift in Sources */,
 				09D907A9285F873E00F1EAC6 /* RoutesView.swift in Sources */,
 				09E1EFF4285E5BC40082F2E1 /* MapViewModel.swift in Sources */,
 				09ECF1C9285DFDCB007B6BAC /* Location.swift in Sources */,
 				0963ED1E285F68DF00B53E78 /* UIVIewController+.swift in Sources */,
+				094C9C2628670D3A002A28DA /* RegistrationViewController.swift in Sources */,
 				09ECF1CD285E0E67007B6BAC /* Route.swift in Sources */,
 				0991DF2A285E513800C098DA /* LocalizedStrings.swift in Sources */,
 				09D907AB285F874D00F1EAC6 /* RoutesViewController.swift in Sources */,
 				097E15B728610767002355F7 /* RowOfRouteData.swift in Sources */,
+				0915B331286CAE770053D559 /* AppConstants.swift in Sources */,
 				09A19BFC28311237001440CA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

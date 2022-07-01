@@ -16,3 +16,14 @@
 "selectRoute_close" = "Закрыть";
 "selectRoute_start" = "Начало";
 "selectRoute_finish" = "Конец";
+
+"login_input_login" = "Ваш логин";
+"login_input_password" = "Ваш пароль";
+"login_authorize_button" = "Авторизоваться";
+"login_create_account_button" = "Создать аккаунт";
+"login_title" = "Авторизация";
+"login_user_invalid" = "Неверный логин или пароль";
+
+"registration_title" = "Регистрация";
+"registration_button_title" = "Зарегистрироваться";
+"registration_error" = "Ошибка регистрации";
