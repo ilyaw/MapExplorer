@@ -26,6 +26,7 @@ class LoginBaseView: UIView {
         let field = UITextField()
         field.borderStyle = .roundedRect
         field.placeholder = Strings.Login.inputLogin
+        field.autocorrectionType = .no
         return field
     }()
     
@@ -35,6 +36,7 @@ class LoginBaseView: UIView {
         field.borderStyle = .roundedRect
         field.placeholder = Strings.Login.inputPassword
         field.isSecureTextEntry = true
+        field.autocorrectionType = .no
         return field
     }()
     
