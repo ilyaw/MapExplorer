@@ -44,6 +44,7 @@
 		09ECF1C6285DFD05007B6BAC /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ECF1C5285DFD05007B6BAC /* RealmManager.swift */; };
 		09ECF1C9285DFDCB007B6BAC /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ECF1C8285DFDCB007B6BAC /* Location.swift */; };
 		09ECF1CD285E0E67007B6BAC /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ECF1CC285E0E67007B6BAC /* Route.swift */; };
+		09ED9948286F690800D7B6D0 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ED9947286F690800D7B6D0 /* LocationManager.swift */; };
 		4425868E5AC452DEC6DA483F /* Pods_MapExplorer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06BC8E54C4EB5C3ADAF2590D /* Pods_MapExplorer.framework */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +91,7 @@
 		09ECF1C5285DFD05007B6BAC /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		09ECF1C8285DFDCB007B6BAC /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		09ECF1CC285E0E67007B6BAC /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		09ED9947286F690800D7B6D0 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		695B3535AC2E1C1629FA0FD4 /* Pods-MapExplorer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapExplorer.release.xcconfig"; path = "Target Support Files/Pods-MapExplorer/Pods-MapExplorer.release.xcconfig"; sourceTree = "<group>"; };
 		7E20EA102A91B92EDF315F89 /* Pods-MapExplorer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapExplorer.debug.xcconfig"; path = "Target Support Files/Pods-MapExplorer/Pods-MapExplorer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -235,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				0915B330286CAE770053D559 /* AppConstants.swift */,
+				09ED9947286F690800D7B6D0 /* LocationManager.swift */,
 				093542AE285E6F1A0023F5BD /* Components */,
 				0991DF1D285E4EA500C098DA /* Extensions */,
 			);
@@ -517,6 +520,7 @@
 				097E15B02860F89C002355F7 /* SelectRouteViewController.swift in Sources */,
 				09D907B0285F9E7200F1EAC6 /* AppRouter.swift in Sources */,
 				0976B1BC2862545300420B42 /* LoginViewController.swift in Sources */,
+				09ED9948286F690800D7B6D0 /* LocationManager.swift in Sources */,
 				0976B1BE2862548E00420B42 /* LoginView.swift in Sources */,
 				093542B2285E72060023F5BD /* UIStackView+.swift in Sources */,
 				09BE18CF285FB77F00772BC0 /* RoutesViewModel.swift in Sources */,
