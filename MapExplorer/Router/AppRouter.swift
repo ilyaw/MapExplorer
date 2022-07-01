@@ -18,6 +18,8 @@ protocol AppRouterDelegate: AnyObject {
     func openMap()
     /// Презентует экран с выбранным маршрутом
     func showRoute(locations: [Location])
+    /// Показываем/скрываем шторку
+    func setBlind(_ isActive: Bool)
     /// Запуск координатора
     func start()
 }
@@ -76,6 +78,16 @@ class AppRouter: AppRouterDelegate {
         guard let controller = container.resolve(SelectRouteViewController.self, argument: locations) else { return }
         present(controller)
     }
+
+    func setBlind(_ isActive: Bool) {
+        guard let controller = container.resolve(BlindViewController.self) else { return }
+        controller.modalPresentationStyle = .fullScreen
+        if isActive {
+            present(controller, animated: false)
+        } else {
+            dismiss(animated: false)
+        }
+    }
     
     // MARK: - Private methods
     
@@ -85,6 +97,10 @@ class AppRouter: AppRouterDelegate {
     
     private func present(_ controller: UIViewController, animated: Bool = true) {
         navigationController.present(controller, animated: animated)
+    }
+    
+    private func dismiss(animated: Bool = true) {
+        navigationController.dismiss(animated: false)
     }
     
     private func setViewControllers(_ controllers: [UIViewController], animated: Bool = true) {
