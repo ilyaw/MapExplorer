@@ -45,6 +45,7 @@ class LoginViewController: UIViewController, View {
     func bind(reactor: LoginViewModel) {
         var user: (String, String) { (customView.loginField.text ?? "", customView.passwordField.text ?? "")  }
         
+        // Биндинг для включения/выключения доступности кнопки "регистрация"
         customView.configureLoginBindings()
             .bind { [weak self] inputFilled in
                 self?.customView.loginButton.isEnabled = inputFilled

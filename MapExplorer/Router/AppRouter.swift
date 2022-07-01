@@ -40,7 +40,6 @@ class AppRouter: AppRouterDelegate {
     // MARK: - Public methods
     
     func start() {
-        UserDefaults.standard.set(false, forKey: AppConstants.loginKey)
         if UserDefaults.standard.bool(forKey: AppConstants.loginKey) {
             openMap()
         } else {
