@@ -34,6 +34,7 @@
 		09A19C0328311239001440CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09A19C0228311239001440CA /* Assets.xcassets */; };
 		09A19C0628311239001440CA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09A19C0428311239001440CA /* LaunchScreen.storyboard */; };
 		09A48B9A285E552200CC2993 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A48B99285E552200CC2993 /* String+.swift */; };
+		09B9C8ED286F2BD3002A33D1 /* BlindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B9C8EC286F2BD3002A33D1 /* BlindViewController.swift */; };
 		09BE18CF285FB77F00772BC0 /* RoutesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BE18CE285FB77F00772BC0 /* RoutesViewModel.swift */; };
 		09D907A9285F873E00F1EAC6 /* RoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D907A8285F873E00F1EAC6 /* RoutesView.swift */; };
 		09D907AB285F874D00F1EAC6 /* RoutesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D907AA285F874D00F1EAC6 /* RoutesViewController.swift */; };
@@ -79,6 +80,7 @@
 		09A19C0528311239001440CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		09A19C0728311239001440CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09A48B99285E552200CC2993 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		09B9C8EC286F2BD3002A33D1 /* BlindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlindViewController.swift; sourceTree = "<group>"; };
 		09BE18CE285FB77F00772BC0 /* RoutesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesViewModel.swift; sourceTree = "<group>"; };
 		09D907A8285F873E00F1EAC6 /* RoutesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesView.swift; sourceTree = "<group>"; };
 		09D907AA285F874D00F1EAC6 /* RoutesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesViewController.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 		0982F778285DCC0400FB1112 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
+				09B9C8EB286F2BC7002A33D1 /* Blind */,
 				09E27AFD28663CAF00E8A4FD /* BaseView */,
 				0976B1BA2862543D00420B42 /* Login */,
 				09E27AFC28663C6700E8A4FD /* Registration */,
@@ -281,6 +284,14 @@
 				0982F77A285DD5B100FB1112 /* Resources */,
 			);
 			path = MapExplorer;
+			sourceTree = "<group>";
+		};
+		09B9C8EB286F2BC7002A33D1 /* Blind */ = {
+			isa = PBXGroup;
+			children = (
+				09B9C8EC286F2BD3002A33D1 /* BlindViewController.swift */,
+			);
+			path = Blind;
 			sourceTree = "<group>";
 		};
 		09BE18CC285FB76900772BC0 /* View */ = {
@@ -516,6 +527,7 @@
 				094C9C2628670D3A002A28DA /* RegistrationViewController.swift in Sources */,
 				09ECF1CD285E0E67007B6BAC /* Route.swift in Sources */,
 				0991DF2A285E513800C098DA /* LocalizedStrings.swift in Sources */,
+				09B9C8ED286F2BD3002A33D1 /* BlindViewController.swift in Sources */,
 				09D907AB285F874D00F1EAC6 /* RoutesViewController.swift in Sources */,
 				097E15B728610767002355F7 /* RowOfRouteData.swift in Sources */,
 				0915B331286CAE770053D559 /* AppConstants.swift in Sources */,
