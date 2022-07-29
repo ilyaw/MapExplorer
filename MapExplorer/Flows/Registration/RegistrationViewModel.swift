@@ -46,9 +46,7 @@ class RegistrationViewModel: Reactor {
         
         return newState
     }
-    
-    var qwe = false
-    
+        
     /// Регистрация
     private func signup(username: String, password: String) -> Observable<Mutation> {
         return Single<Bool>.create { [weak self] single in

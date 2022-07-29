@@ -28,21 +28,22 @@ class MapViewController: UIViewController, View {
     
     private var marker: GMSMarker?
     private var geoCoder: CLGeocoder?
-    private var locationManager: CLLocationManager?
     private var route: GMSPolyline?
     private var routePath: GMSMutablePath?
+    private let locationManager: LocationManager
     
     // Дефолтные координаты
     private let coordinate = CLLocationCoordinate2D(latitude: 64.540643163229,
                                                     longitude: 39.805884020953464)
     
     private let customView = MapView(frame: UIScreen.main.bounds)
-    
+
     private var userRoute: Route?
     private let viewModel: MapViewModel
     
-    init(viewModel: MapViewModel) {
+    init(viewModel: MapViewModel, locationManager: LocationManager) {
         self.viewModel = viewModel
+        self.locationManager = locationManager
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -63,13 +64,32 @@ class MapViewController: UIViewController, View {
         
         reactor = viewModel
         configureMap()
-        configureLocationManager()
     }
     
     // MARK: - Public methods
     
     /// Биндинг
     func bind(reactor: MapViewModel) {
+        
+        // Подписка на изменение локации пользователя
+        locationManager.location
+            .asObservable()
+            .compactMap { $0 }
+            .bind { [unowned self] currentLocation in
+                routePath?.add(currentLocation.coordinate)
+                route?.path = routePath
+                
+                customView.mapView.animate(toLocation: currentLocation.coordinate)
+                
+                routePath?.add(currentLocation.coordinate)
+                let polyline = GMSPolyline(path: routePath)
+                polyline.strokeWidth = 10
+                polyline.strokeColor = .red
+                polyline.map = customView.mapView
+                
+                userRoute?.locations.append(Location(location: currentLocation.coordinate))
+            }
+            .disposed(by: disposeBag)
         
         // Тап по кнопке старт
         customView.startButton.rx.tap
@@ -141,18 +161,16 @@ class MapViewController: UIViewController, View {
     
     private func start() {
         userRoute = Route()
-        locationManager?.requestLocation()
-        
         route?.map = nil
         route = GMSPolyline()
         routePath = GMSMutablePath()
         route?.map = customView.mapView
         
-        locationManager?.startUpdatingLocation()
+        locationManager.startUpdatingLocation()
     }
     
     private func stop() {
-        self.locationManager?.stopUpdatingLocation()
+        locationManager.stopUpdatingLocation()
     }
     
     private func configureMap() {
@@ -160,13 +178,6 @@ class MapViewController: UIViewController, View {
         customView.mapView.camera = camera
         customView.mapView.isMyLocationEnabled = true
         customView.mapView.delegate = self
-    }
-    
-    private func configureLocationManager() {
-        locationManager = CLLocationManager()
-        locationManager?.delegate = self
-        locationManager?.requestAlwaysAuthorization()
-        locationManager?.allowsBackgroundLocationUpdates = true
     }
 }
 
@@ -188,30 +199,3 @@ extension MapViewController: GMSMapViewDelegate {
         }
     }
 }
-
-// MARK: - MapViewController + CLLocationManagerDelegate
-
-extension MapViewController: CLLocationManagerDelegate {
-    // Получает данные по мере того как наш объект двигается по карте
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let currentLocation = locations.last else { return }
-        
-        routePath?.add(currentLocation.coordinate)
-        route?.path = routePath
-        
-        customView.mapView.animate(toLocation: currentLocation.coordinate)
-        
-        routePath?.add(currentLocation.coordinate)
-        let polyline = GMSPolyline(path: routePath)
-        polyline.strokeWidth = 10
-        polyline.strokeColor = .red
-        polyline.map = customView.mapView
-        
-        userRoute?.locations.append(Location(location: currentLocation.coordinate))
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error.localizedDescription)
-    }
-}
-

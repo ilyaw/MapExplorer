@@ -50,7 +50,8 @@ private extension SceneDelegate {
         // Карта
         container.register(MapViewController.self) { _ in
             let viewModel = MapViewModel()
-            let controller = MapViewController(viewModel: viewModel)
+            let locationManager = LocationManagerImpl()
+            let controller = MapViewController(viewModel: viewModel, locationManager: locationManager)
             return controller
         }
         
